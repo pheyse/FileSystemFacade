@@ -1,0 +1,8 @@
+All tests:
+just run JUnit on src/test/java
+
+Test only integration tests:
+filter to only include tag "IT"
+
+Test only unit tests:
+filter to exclude tag "IT"

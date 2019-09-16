@@ -1,0 +1,8 @@
+install BEAM jar file (located in the libs dir) which is required for the projects:
+Maven goal: "clean"
+
+create jar file without running integration tests:
+Maven goal: "package"
+
+Running integration-test (which require DB connection, write to local file system, require a remote connection):
+Maven goal: "integration-test"
