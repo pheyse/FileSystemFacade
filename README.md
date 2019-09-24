@@ -89,6 +89,17 @@ public void static void main(String[] args){
 }
 ```
 
+## Including via Maven
+```xml
+[...]
+		<dependency>
+			<groupId>de.bright-side.filesystemfacade</groupId>
+			<artifactId>filesystemfacade</artifactId>
+			<version>2.6.0</version>
+		</dependency>
+[...]
+```
+
  
 ## Change History
 Version 2.3.0 (2019-08-03)

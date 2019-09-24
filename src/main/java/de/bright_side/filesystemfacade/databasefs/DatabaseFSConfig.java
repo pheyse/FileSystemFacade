@@ -83,7 +83,7 @@ public class DatabaseFSConfig {
 		return tenantName;
 	}
 	/**
-	 * @param tenant the table which contains the file system data is separated into different apps and those into tenants. Each app-tenant-combination has its own file system
+	 * @param tenantName the table which contains the file system data is separated into different apps and those into tenants. Each app-tenant-combination has its own file system
 	 */
 	public void setTenantName(String tenantName) {
 		this.tenantName = tenantName;
@@ -134,6 +134,7 @@ public class DatabaseFSConfig {
 	
 	/**
 	 * Either dbDriverClassName, dbUrl, dbUserName and dbPassword are needed or a dbConnection object
+	 * @param dbConnection a db connection object 
 	 */
 	public void setDbConnection(Connection dbConnection) {
 		this.dbConnection = dbConnection;

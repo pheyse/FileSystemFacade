@@ -627,16 +627,17 @@ public class HistoryFile extends FSFFileWithInnerFile{
     }
     
     /**
-     * removed all history entries
-     * @throws Exception 
+     * removes all history entries
+     * @throws Exception on general error 
      */
 	public void purgeHistory() throws Exception {
 		purgeHistory(this);
 	}
 
 	/**
-	 * removed all history entries
-	 * @throws Exception 
+	 * removes all history entries
+	 * @param file file object of which the history should be purged
+	 * @throws Exception on general error
 	 */
 	private static void purgeHistory(HistoryFile file) throws Exception {
 		String name = file.innerFile.getName();

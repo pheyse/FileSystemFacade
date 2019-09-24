@@ -63,9 +63,9 @@ public class RemoteFSUtil {
 	
 	/**
 	 * returns the RemoteFileRequest. The rest of the inputStream is the payload
-	 * @param intputStream
-	 * @return 
-	 * @throws Exception
+	 * @param intputStream input stream from which to read the remote file request
+	 * @return RemoteFSRequest object that was read from the input stream
+	 * @throws Exception on general error
 	 */
 	public static RemoteFSRequest readRemoteFileRequestFromStream(InputStream intputStream) throws Exception{
 		byte[] lengthBytes = FSFFileUtil.readExactAmountOfBytes(intputStream, 4);
@@ -79,9 +79,9 @@ public class RemoteFSUtil {
 
 	/**
 	 * returns the RemoteFileRequest. The rest of the inputStream is the payload
-	 * @param intputStream
-	 * @return 
-	 * @throws Exception
+	 * @param intputStream input stream from which to read the remote response
+	 * @return RemoteFSResponse object
+	 * @throws Exception on general error
 	 */
 	public static RemoteFSResponse readRemoteFileResponseFromStream(InputStream intputStream) throws Exception{
 		byte[] lengthBytes = FSFFileUtil.readExactAmountOfBytes(intputStream, 4);

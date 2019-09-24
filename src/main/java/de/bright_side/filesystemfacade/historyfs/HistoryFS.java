@@ -38,9 +38,11 @@ public class HistoryFS implements FSFSystem{
 	
 	/**
 	 * 
-	 * @param innerFS
-	 * @param numberOfHistoryFiles use negative value for infinity, use 0 for no history files
+	 * @param innerFS inner file system on which the HistoryFS is based
 	 * @param trackVersions true creates a version sub-directory which holds the version number in a file of the same name as this file
+	 * @param numberOfHistoryFiles use negative value for infinity, use 0 for no history files
+	 * @param versionDirName name of the directories which contain the version information. If this value is null DEFAULT_HISTORY_DIR_NAME is used
+	 * @param historyDirName name of the directories which contain the history information. If this value is null DEFAULT_HISTORY_DIR_NAME is used
 	 */
 	public HistoryFS(FSFSystem innerFS, boolean trackVersions, int numberOfHistoryFiles, String versionDirName, String historyDirName) {
 		this(innerFS, trackVersions, numberOfHistoryFiles, versionDirName, historyDirName, FSFFileUtil.createDefaultEnvironment());
@@ -48,9 +50,12 @@ public class HistoryFS implements FSFSystem{
 
 	/**
 	 * 
-	 * @param innerFS
+	 * @param innerFS inner file system on which the HistoryFS is based
 	 * @param numberOfHistoryFiles use negative value for infinity, use 0 for no history files
 	 * @param trackVersions true creates a version sub-directory which holds the version number in a file of the same name as this file
+	 * @param versionDirName name of the directories which contain the version information. If this value is null DEFAULT_HISTORY_DIR_NAME is used
+	 * @param historyDirName name of the directories which contain the history information. If this value is null DEFAULT_HISTORY_DIR_NAME is used
+	 * @param environment environment object which e.g. provides the current time
 	 */
 	public HistoryFS(FSFSystem innerFS, boolean trackVersions, int numberOfHistoryFiles, String versionDirName, String historyDirName, FSFEnvironment environment) {
 		this.innerFS = innerFS;

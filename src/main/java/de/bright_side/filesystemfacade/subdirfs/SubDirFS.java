@@ -34,9 +34,9 @@ public class SubDirFS implements FSFSystem{
 
 	/**
 	 * 
-	 * @param innerFS
+	 * @param innerFS the file system on which the SubDirFS is based
 	 * @param basePath the path where the temp file system is located. The base path may not exist yet
-	 * @throws Exception
+	 * @throws Exception on general error
 	 */
 	public SubDirFS(FSFSystem innerFS, String basePath) throws Exception {
 		this(innerFS, basePath, FSFFileUtil.createDefaultEnvironment());
@@ -45,10 +45,10 @@ public class SubDirFS implements FSFSystem{
 	
 	/**
 	 * 
-	 * @param innerFS
+	 * @param innerFS the file system on which the SubDirFS is based
 	 * @param basePath the path where the temp file system is located. The base path may not exist yet
-	 * @param environment
-	 * @throws Exception
+	 * @param environment environment object to e.g. get the current time 
+	 * @throws Exception on general error
 	 */
 	public SubDirFS(FSFSystem innerFS, String basePath, FSFEnvironment environment) throws Exception {
 		this.innerFS = innerFS;

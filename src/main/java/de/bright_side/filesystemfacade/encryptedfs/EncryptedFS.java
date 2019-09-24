@@ -45,21 +45,35 @@ public class EncryptedFS implements FSFSystem{
 	private FSFFile baseDir;
 	private FSFSystem innerFS;
 	
+	/**
+	 * 
+	 * @param innerFS inner file system on which the encrypted file system is based
+	 * @param password password that is used to encrypt and decrypt the data
+	 * @param basePath the path where the encrypted dir is located, e.g. "C:\\data\\myEncryptedDir"
+	 * @throws Exception on general error
+	 */
 	public EncryptedFS(FSFSystem innerFS, String password, String basePath) throws Exception {
 		this (innerFS, password.getBytes(ENCODING), basePath, FSFFileUtil.createDefaultEnvironment());
 	}
 	
+	/**
+	 * 
+	 * @param innerFS inner file system on which the encrypted file system is based
+	 * @param password password that is used to encrypt and decrypt the data
+	 * @param basePath the path where the encrypted dir is located, e.g. "C:\\data\\myEncryptedDir"
+	 * @param environment instance to e.g. provide the current time
+	 * @throws Exception on general error
+	 */
 	public EncryptedFS(FSFSystem innerFS, String password, String basePath, FSFEnvironment environment) throws Exception {
 		this (innerFS, password.getBytes(ENCODING), basePath, environment);
 	}
 	
 	/**
 	 * 
-	 * @param innerFS
-	 * @param password
+	 * @param innerFS inner file system on which the encrypted file system is based
+	 * @param password password that is used to encrypt and decrypt the data
 	 * @param basePath the path where the encrypted dir is located, e.g. "C:\\data\\myEncryptedDir"
-	 * @param environment
-	 * @throws Exception
+	 * @throws Exception on general error
 	 */
 	public EncryptedFS(FSFSystem innerFS, byte[] password, String basePath) throws Exception {
 		this(innerFS, password, basePath, FSFFileUtil.createDefaultEnvironment());
@@ -67,11 +81,11 @@ public class EncryptedFS implements FSFSystem{
 	
 	/**
 	 * 
-	 * @param innerFS
-	 * @param password
+	 * @param innerFS inner file system on which the encrypted file system is based
+	 * @param password password that is used to encrypt and decrypt the data
 	 * @param basePath the path where the encrypted dir is located, e.g. "C:\\data\\myEncryptedDir"
-	 * @param environment
-	 * @throws Exception
+	 * @param environment instance to e.g. provide the current time
+	 * @throws Exception on general error
 	 */
 	public EncryptedFS(FSFSystem innerFS, byte[] password, String basePath, FSFEnvironment environment) throws Exception {
 		this.innerFS = innerFS;
@@ -260,7 +274,10 @@ public class EncryptedFS implements FSFSystem{
 	 * (which is usually the case for the last block) the remaining bytes are filled with random data. Hence each time an encrypted file name is generated, it is different 
 	 * (unless the length matches exactly 1 block).
 	 * @param plainDataLength: null if unknown (e.g. because createByPath was called an no length was provided)
-	 * 
+	 * @param innerParentFile the inner parent file
+	 * @param plainFilename the filename in a not encrypted form
+	 * @param plainDataLength the length of the data if it wasn't encrypted
+	 * @return the existing inner file if found 
 	 */
 	protected FSFFile toExistingInnerFileIfPossibleByParentAndName(FSFFile innerParentFile, String plainFilename, Long plainDataLength) {
 		if (innerParentFile.exists()) {
@@ -286,7 +303,8 @@ public class EncryptedFS implements FSFSystem{
 	 * for each plain file name there are multiple encrypted file names. This is because the encryption is done block-wise and if a block isn't full 
 	 * (which is usually the case for the last block) the remaining bytes are filled with random data. Hence each time an encrypted file name is generated, it is different 
 	 * (unless the length matches exactly 1 block).
-	 * 
+	 * @param innerFile the current inner file
+	 * @return the new inner file
 	 */
 	protected FSFFile toExistingInnerFileIfPossible(FSFFile innerFile) {
 		if (innerFile == null) {
@@ -323,11 +341,12 @@ public class EncryptedFS implements FSFSystem{
 	}
 
 	/**
-	 * 
-	 * @param file
+	 * The file size is stored in the filename so that it can be returned without any processing logic. However the filename needs to be adjusted whenever the length of the file changes.
+	 * This method performs that operation.
+	 * @param file the file object which should be renamed
 	 * @param appendedLength if appended, the length before the appending. Otherwise 0
 	 * @param writtenBytes number of written bytes
-	 * @throws IOException
+	 * @throws IOException on general errors
 	 */
 	protected void renameAccordingToLength(EncryptedFile file, long appendedLength, long writtenBytes) throws IOException {
 		String plainFilename = file.getName();

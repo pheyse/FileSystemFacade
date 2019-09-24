@@ -37,7 +37,13 @@ public class FSFFileUtil {
 	private static final SimpleDateFormat TIME_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.ssss");
 	private static final String STRING_ENCODING = "UTF-8";
 	private static final boolean LOGGING_ENABLED = false;
-	
+
+	/**
+	 * 
+	 * @param fs file system of which the files should be listed
+	 * @return the file listing as a string
+	 * @throws Exception on general error
+	 */
 	@SuppressWarnings("unused")
 	private static String listDirFormattingSimple(FSFSystem fs) throws Exception{
 		ListDirFormatting formatting = new ListDirFormatting();
@@ -179,6 +185,8 @@ public class FSFFileUtil {
 	}
 
 	/**
+	 * @param file file object which holds the directory of which the files tree should be listed
+	 * @throws Exception on general error
 	 * @return all sub-items recursively and as a list ordered by path
 	 */
 	public static List<FSFFile> listFilesTree(FSFFile file) throws Exception{
@@ -186,7 +194,10 @@ public class FSFFileUtil {
 	}
 	
 	/**
+	 * @param file file object that holds the directory of which the file tree should be listed
+	 * @param filenamesToSkip list of filenames to be skipped (e.g. history directories)
 	 * @return all sub-items recursively and as a list ordered by path
+	 * @throws Exception on general error
 	 */
 	public static List<FSFFile> listFilesTree(FSFFile file, Set<String> filenamesToSkip) throws Exception{
 		List<FSFFile> unsortedItems = new ArrayList<>();
@@ -220,8 +231,8 @@ public class FSFFileUtil {
 	
 	/**
 	 * deletes the given item and all sub-items recursively
-	 * @param file
-	 * @throws Exception
+	 * @param file file object which represents the directory to be deleted
+	 * @throws Exception on general error
 	 */
 	public static void deleteTree(FSFFile file) throws Exception{
 		if (!file.exists()) {
@@ -245,8 +256,10 @@ public class FSFFileUtil {
 	
 	/**
 	 * copies all sub-items recursively to the dest directory
-	 * @param file
-	 * @throws Exception
+	 * @param source source directory to be copied
+	 * @param dest dest directory to be copied to
+	 * @param copyVersionData if true the version data is copied as well
+	 * @throws Exception on general error
 	 */
 	public static void copyFilesTree(FSFFile source, FSFFile dest, boolean copyVersionData) throws Exception{
 //		log("copyFilesTree: source = " + source + ", dest = " + dest + ", copyVersionData = " + copyVersionData);
@@ -487,6 +500,10 @@ public class FSFFileUtil {
 	}
 	
 	/**
+	 * @param b1 first byte
+	 * @param b2 second byte
+	 * @param b3 third byte
+	 * @param b4 fourth byte
 	 * @return An integer that contains the values of the byte array
 	 */
 	public static final int convertToInt(byte b1, byte b2, byte b3, byte b4) {
@@ -502,6 +519,7 @@ public class FSFFileUtil {
 	}
 
 	/**
+	 * @param bytes bytes to be converted
 	 * @return A long value that contains the values of the byte array
 	 */
 	public static final long convert8ByteArrayToLong(byte[] bytes) {
@@ -509,7 +527,7 @@ public class FSFFileUtil {
 	}
 
 	/**
-	 * @param longValue
+	 * @param longValue value to be converted
 	 * @return A byte array that contains the value of the long-value
 	 */
 	public static final byte[] convertTo8ByteArray(long longValue) {
