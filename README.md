@@ -125,3 +125,7 @@ Version 2.5.2 (2019-09-12)
  
 Version 2.6.0 (2019-09-13)
  - RemoteFS allow reading file history
+
+ Version 2.6.1 (2019-10-21)
+ - set dependency of mariadb-java-client to scope "test" in pom.xml to aviod problems when including in Android
+ 
