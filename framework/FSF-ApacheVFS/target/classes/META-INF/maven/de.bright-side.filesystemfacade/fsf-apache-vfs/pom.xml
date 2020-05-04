@@ -1,0 +1,54 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>de.bright-side.filesystemfacade</groupId>
+		<artifactId>fsf-parent-project</artifactId>
+		<relativePath>
+			../FSF-ParentPOM/pom.xml
+		</relativePath>
+		<version>2.7.0</version>
+	</parent>
+
+	<groupId>de.bright-side.filesystemfacade</groupId>
+	<artifactId>fsf-apache-vfs</artifactId>
+	<version>2.7.0</version>
+	<name>FSF Apache VFS</name>
+	<description>A facade the Apache Commons VFS</description>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>de.bright-side.filesystemfacade</groupId>
+			<artifactId>filesystemfacade</artifactId>
+			<version>2.7.0</version>
+		</dependency>
+		        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-vfs2</artifactId>
+            <version>2.6.0</version>
+        </dependency>
+		
+		<dependency>
+			<groupId>de.bright-side.filesystemfacade</groupId>
+			<artifactId>fsf-common-tests</artifactId>
+			<version>2.7.0</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+
+	<reporting>
+		<plugins>
+			<plugin>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</reporting>
+</project>

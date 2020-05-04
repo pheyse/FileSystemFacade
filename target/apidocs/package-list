@@ -1,9 +1,0 @@
-de.bright_side.filesystemfacade.databasefs
-de.bright_side.filesystemfacade.encryptedfs
-de.bright_side.filesystemfacade.facade
-de.bright_side.filesystemfacade.historyfs
-de.bright_side.filesystemfacade.memoryfs
-de.bright_side.filesystemfacade.nativefs
-de.bright_side.filesystemfacade.remotefs
-de.bright_side.filesystemfacade.subdirfs
-de.bright_side.filesystemfacade.util

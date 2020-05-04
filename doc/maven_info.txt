@@ -1,3 +1,9 @@
+Building:
+in the "mvn clean package" in root dir of parent-pom which is "framework/FSF-ParentPOM"
+
+
+
+
 install BEAM jar file (located in the libs dir) which is required for the projects:
 Maven goal: "clean"
 

@@ -1,10 +1,9 @@
 # FileSystemFacade
-A facade to different file system types such as Native (like java.io.File), in memory, database, server, history, sub-directory and encrypted as well as combinations of these.
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+A facade to different file system types such as Native (like java.io.File), in memory, database, server, SFTP history, sub-directory and encrypted as well as combinations of these.
 
-Created 2017-2019 by Philip Heyse
+Created 2017-2020 by Philip Heyse
 
-## License
-Apace V2
 
 ## Featuers
  - FileSystemFacade (FSF) allows you to write unit tests simulating the regular file system in memory. All tests can run in parallel without any interference. With the change of one line of code / calling a different init-method the actual native file system (java.io.File) is used
@@ -60,6 +59,13 @@ public FSFFile getAppDir(int type) throws Exception {
 		new HistoryFS(new NativeFS(), true).createByPath("C:\\my_data\\app1");
 	case 9:
 		new SubDirFS(new NativeFS(), "/usr/local/app1").createByPath("/");
+	case 10:
+		SftpFSConfig config = new SftpFSConfig();
+		config.setHost("sftp.myserver.com");
+		config.setPort(21);
+		config.setUser("myuser");
+		config.setPassword("mypass");
+		new new SftpFS(SftpFS.Mode.VFS, config, "/myuser_dir").createByPath("/myuser_dir/data");
 	default:
 		throw new Exception("Unexpected type: " + type);
 	}
@@ -89,17 +95,34 @@ public void static void main(String[] args){
 }
 ```
 
-## Including via Maven
+## Maven Dependencies
+### Core Library (memory, database, server, sub-directory and encrypted, etc.)
 ```xml
-[...]
 		<dependency>
 			<groupId>de.bright-side.filesystemfacade</groupId>
 			<artifactId>filesystemfacade</artifactId>
-			<version>2.6.0</version>
+			<version>2.7.0</version>
 		</dependency>
-[...]
+```
+### SFTP Library
+```xml
+		<dependency>
+			<groupId>de.bright-side.filesystemfacade</groupId>
+			<artifactId>fsf-sftp</artifactId>
+			<version>2.7.0</version>
+		</dependency>
 ```
 
+## Building and testing
+In the "mvn clean package" in root dir of parent-pom which is "framework/FSF-ParentPOM"
+To run the integration-test (which require DB connection, a remote connection, write to local file system) execute Maven goal: "integration-test" and provide settings in directory ".FileSystemFacade_test_config" in the user-dir.
+
+## Project Structure
+ - There is one parent POM located in "framework/FSF-ParentPOM".
+ - "framework/FSF-Core" contains the core library incl. memory, database, server, sub-directory and encrypted, etc.
+ - "framework/FSF-CommonTests" contains the test which can be used by the core as well as other modules. In order to make these tests re-usable they are included in the jar and not just in the test-scope.
+ - "framework/FSF-ApacheVFS" contains a facade to Apache Commons VSF. It may also be extended to support other file system types such as Hadoop. It is based on the core library and uses the FSF-CommonTests.
+ - "framework/FSF-SFTP" contains the support for SFTP based on FSF-ApacheVFS.
  
 ## Change History
 Version 2.3.0 (2019-08-03)
@@ -128,4 +151,8 @@ Version 2.6.0 (2019-09-13)
 
  Version 2.6.1 (2019-10-21)
  - set dependency of mariadb-java-client to scope "test" in pom.xml to aviod problems when including in Android
- 
+
+Version 2.7.0 (2020-05-04)
+ - Restructured project into different sub-projects
+ - added "bridge" to Apache Commons VFS
+ - added support for SFTP
