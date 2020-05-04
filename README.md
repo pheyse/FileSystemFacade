@@ -1,7 +1,7 @@
-# FileSystemFacade
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-A facade to different file system types such as Native (like java.io.File), in memory, database, server, SFTP history, sub-directory and encrypted as well as combinations of these.
 
+# FileSystemFacade
+A facade to different file system types such as Native (like java.io.File), in memory, database, server, SFTP history, sub-directory and encrypted as well as combinations of these.
 Created 2017-2020 by Philip Heyse
 
 
@@ -114,8 +114,7 @@ public void static void main(String[] args){
 ```
 
 ## Building and testing
-In the "mvn clean package" in root dir of parent-pom which is "framework/FSF-ParentPOM"
-To run the integration-test (which require DB connection, a remote connection, write to local file system) execute Maven goal: "integration-test" and provide settings in directory ".FileSystemFacade_test_config" in the user-dir.
+In the "mvn clean package" in root dir of parent-pom which is "framework/FSF-ParentPOM".  To run the integration-test (which require DB connection, a remote connection, write to local file system) execute Maven goal: "integration-test" and provide settings in directory ".FileSystemFacade_test_config" in the user-dir.
 
 ## Project Structure
  - There is one parent POM located in "framework/FSF-ParentPOM".
